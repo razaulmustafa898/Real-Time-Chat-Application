@@ -2,8 +2,14 @@
 const mongoose = require("mongoose");
 
 const chatSchema = new mongoose.Schema({
-  message: String,
-  timestamp: Date,
+  message: {
+    type: String,
+    require: true,
+  },
+  timestamp: {
+    type: Date,
+    require: true,
+  },
   isRead: Boolean,
   images: [String],
   videos: [String],
@@ -11,7 +17,7 @@ const chatSchema = new mongoose.Schema({
 
 // Use existing model if it exists, else create a new one
 const Chat =
-  mongoose.models.projects ||
+  mongoose.models.chats ||
   mongoose.model("chats", chatSchema);
 
 module.exports = Chat;
