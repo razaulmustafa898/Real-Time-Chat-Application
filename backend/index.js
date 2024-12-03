@@ -1,7 +1,7 @@
 require("dotenv/config");
 const express = require("express");
 const cors = require("cors");
-const router = require("./routes/chats.route");
+const chatMainRoutes = require("./routes/chatMainRoutes");
 const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT;
@@ -23,10 +23,12 @@ mongoose
     console.error("MongoDB connection error:", error)
   );
 
-app.use("/chats", router);
+app.use("/", chatMainRoutes);
 
 app.get("/", (req, res) => {
-  res.status(200).json({ test: "Hello, World!" });
+  res
+    .status(200)
+    .json({ message: "Server connencted to database" });
 });
 
 app.listen(PORT, () => {
