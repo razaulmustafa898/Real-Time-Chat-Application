@@ -11,7 +11,7 @@ const HomeProfilesSchema = new mongoose.Schema({
 
 // Use existing model if it exists, else create a new one
 const homeProfiles =
-  mongoose.models.homeProfiles ||
+  // mongoose.models.homeProfiles ||
   mongoose.model("homeProfiles", HomeProfilesSchema);
 
 module.exports = homeProfiles;

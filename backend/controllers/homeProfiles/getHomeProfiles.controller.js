@@ -3,26 +3,22 @@ const homeProfiles = require("../../models/homeProfiles");
 async function getHomeProfiles(req, res) {
   try {
     const fetchHomeProfiles = await homeProfiles.find();
-    const checkSuccess = res.status(200);
-    const checkError = res.status(500) || res.status(404);
-    if (checkSuccess) {
-      checkSuccess.json({
-        error: false,
-        message: "Home profiles fetched successfully",
-        homeProfiles: fetchHomeProfiles,
-      });
-    }
-    if (checkError) {
-      checkError.json({
+    if (!fetchHomeProfiles.length) {
+      return res.status(404).json({
         error: true,
-        message: `Failed to fetch home profiles`,
+        message: "No home profiles found",
       });
     }
+    res.status(200).json({
+      error: false,
+      message: "Home profiles fetched successfully",
+      homeProfiles: fetchHomeProfiles,
+    });
   } catch (error) {
     res.status(500).json({
       error: true,
-      message: `Error fetching home profiles`,
-      error,
+      message: "Error fetching home profiles",
+      details: error.message,
     });
   }
 }

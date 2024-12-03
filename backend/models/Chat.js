@@ -17,7 +17,7 @@ const chatSchema = new mongoose.Schema({
 
 // Use existing model if it exists, else create a new one
 const Chat =
-  mongoose.models.chats ||
+  // mongoose.models.chats ||
   mongoose.model("chats", chatSchema);
 
 module.exports = Chat;
